@@ -36,8 +36,8 @@ jobs:
         run: |
           vagrant destroy -f
           mkdir -p ./tmp
-          cd ./tmp
           cp package.box ./tmp/package.box
+          cd ./tmp
           vagrant init debian-test
           vagrant up
           vagrant ssh --command "neovim --version"
