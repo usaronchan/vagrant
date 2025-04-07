@@ -22,20 +22,21 @@ jobs:
       - name: List generated box file (debug)
         run: |
           find . -name "package.box"
-          gzip -c package.box > package.box.gz
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: my-artifact
-          path: ${{ github.workspace }}/*.box.gz
-          # 将保留天数设置为3天，最多可设置90天
-          retention-days: 3
+          # gzip -c package.box > package.box.gz
+      # - name: Upload Artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: my-artifact
+      #     path: ${{ github.workspace }}/*.box.gz
+      #     # 将保留天数设置为3天，最多可设置90天
+      #     retention-days: 3
       - run: |
           vagrant box add --name debian-test --provider=virtualbox ./package.box
       - name: test
         run: |
           vagrant destroy -f
           mkdir -p ./tmp
+          cd ./tmp
           cp package.box ./tmp/package.box
           vagrant init debian-test
           vagrant up
