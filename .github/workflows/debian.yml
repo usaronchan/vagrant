@@ -33,7 +33,7 @@ jobs:
           cd debian
           vagrant up
           vagrant plugin install vagrant-vbguest
-          vagrant package --vagrantfile ./debian/Vagrantfile
+          vagrant package --vagrantfile ./Vagrantfile
       - name: List generated box file (debug)
         if: inputs.release
         run: |
